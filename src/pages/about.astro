@@ -1,11 +1,86 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
----
+import { LINKEDIN_URL, SITE_TITLE } from "../consts";
+import invisible from "../assets/credentials/invisible.svg?url";
+import mckinsey from "../assets/credentials/mckinsey.svg?url";
+import insead from "../assets/credentials/insead.jpg?url";
+import cbs from "../assets/credentials/cbs.svg?url";
+import mit from "../assets/credentials/mit.svg?url";
 
-<BaseLayout title="About">
-	<h1>About</h1>
-	<p>
-		Write your real bio here. Who you are, what you work on, and what you write about — this is
-		the page people land on after clicking through from LinkedIn.
-	</p>
+const experience = [
+  { name: "Invisible Technologies", detail: "VP of Enterprise", logo: invisible },
+  { name: "McKinsey & Company", detail: "Nine years, most recently as Associate Partner", logo: mckinsey },
+];
+const education = [
+  { name: "INSEAD", detail: "MBA focused on finance, strategy, and data.", logo: insead },
+  { name: "Copenhagen Business School", detail: "B.Sc. in International Business, with studies in Denmark, Hong Kong, and the United States.", logo: cbs },
+  { name: "MIT Sloan Executive Education", detail: "Artificial Intelligence: Implications for Business Strategy, delivered with CSAIL.", logo: mit },
+];
+---
+<BaseLayout title="About" description="Oliver Bjørner Søe helps enterprises use technology to grow profitably and improve how people work.">
+  <div class="shell inner-page about-layout">
+    <header class="page-heading">
+      <p class="label">About</p>
+      <h1>{SITE_TITLE}</h1>
+      <a class="text-link" href={LINKEDIN_URL}>Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <div class="about-content">
+      <div class="prose">
+        <p>I'm VP of Enterprise at Invisible Technologies, where I help business leaders figure out where AI can create value and what it takes to put it to work. Before Invisible, I spent nine years at McKinsey, most recently as an Associate Partner, advising financial institutions, private equity investors, and software companies on strategy, growth, AI transformation, and M&A. I was a leader in McKinsey’s Rewired for Private Equity service line, where I helped portfolio companies use technology and AI to transform how they operate.</p>
+
+        <h2>What drives me</h2>
+        <p>I want to help businesses use technology to grow profitably and give people more room to exercise judgment and do good work. I'm optimistic about what AI can make possible when teams use it to improve how work gets done. That might mean serving customers in ways that used to be too costly or giving employees the tools and time to tackle problems they couldn't take on before.</p>
+
+        <h2>What working across markets taught me</h2>
+        <p>I've worked with enterprise clients across Europe, Asia, and the United States. Seeing how companies operate in different working cultures has shaped how I approach AI adoption. How decisions are made, where teams have autonomy, and how they build trust in new tools all influence where a company can start and how it can scale.</p>
+      </div>
+
+      {[{ title: "Experience", items: experience }, { title: "Education", items: education }].map(({ title, items }) => (
+        <section class="credentials">
+          <h2>{title}</h2>
+          <ul role="list">
+            {items.map(({ name, detail, logo }) => (
+              <li>
+                <div class="credential-row">
+                  <div class="credential-logo"><img src={logo} alt="" loading="lazy" /></div>
+                  <div><h3>{name}</h3><p>{detail}</p></div>
+                </div>
+              </li>
+            ))}
+          </ul>
+          {title === "Experience" && <p class="logo-credit">Image/Logo courtesy of Invisible Technologies Inc.</p>}
+        </section>
+      ))}
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+  .credentials { margin-top: 2.75rem; }
+  .credentials h2 { font: 2.7rem/1.03 var(--serif); margin-bottom: .9rem; }
+  .credentials ul { margin: 0; padding: 0; list-style: none; }
+  .credentials li { border-top: 1px solid var(--line); padding: .85rem 0; }
+  .credential-row {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+  }
+  .credential-logo {
+    display: grid;
+    place-items: center;
+    min-height: 3.65rem;
+    padding: .5rem;
+    background: #fff;
+    border: 1px solid var(--line);
+  }
+  .credential-logo img { width: 100%; height: 2.5rem; object-fit: contain; }
+  .credential-row h3 { font-size: .98rem; font-weight: 650; }
+  .credential-row p, .logo-credit { color: var(--muted); }
+  .credential-row p { font-size: .9rem; }
+  .logo-credit { margin-top: .4rem; font-size: .72rem; }
+  @media (max-width: 455px) {
+    .credential-row { grid-template-columns: 5.2rem minmax(0, 1fr); gap: .7rem; }
+  }
+</style>

@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { reflectionMeta } from "../reflections";
+
+interface Props {
+  entry: CollectionEntry<"reflections">;
+}
+
+const { entry } = Astro.props;
+const { title, description, image } = entry.data;
+const href = `/reflections/${entry.id}/`;
+---
+<article class:list={["story-card", { "with-image": image }]}>
+  <div class="story-copy">
+    <p class="label">{reflectionMeta(entry)}</p>
+    <h3><a href={href}>{title}</a></h3>
+    <p class="story-description">{description}</p>
+    <span class="read-more" aria-hidden="true">Read the reflection <span>↗</span></span>
+  </div>
+  {image && <img src={image} alt="" width="1200" height="800" />}
+</article>

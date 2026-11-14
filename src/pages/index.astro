@@ -1,40 +1,36 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
-import { SITE_TITLE, SITE_TAGLINE } from "../consts";
+import ReflectionCard from "../components/ReflectionCard.astro";
+import { getReflections } from "../reflections";
 
-const posts = (await getCollection("blog", ({ data }) => !data.draft))
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 3);
+const [featured, ...recent] = await getReflections();
 ---
-
 <BaseLayout>
-	<h1>{SITE_TITLE}</h1>
-	<p>{SITE_TAGLINE}</p>
-
-	{
-		posts.length > 0 && (
-			<>
-				<h2>Recent writing</h2>
-				<ul class="entry-list">
-					{posts.map((post) => (
-						<li>
-							<a class="entry-title" href={`/blog/${post.id}/`}>
-								{post.data.title}
-							</a>
-							<p class="entry-meta">
-								{post.data.pubDate.toLocaleDateString("en-US", {
-									year: "numeric",
-									month: "long",
-									day: "numeric",
-								})}
-							</p>
-							<p class="entry-description">{post.data.description}</p>
-						</li>
-					))}
-				</ul>
-				<p><a href="/blog/">All writing &rarr;</a></p>
-			</>
-		)
-	}
+  <div class="shell">
+    <section class="hero">
+      <div class="hero-title">
+        <p class="label">Essays by Oliver Bjørner Søe</p>
+        <h1>Reflections on AI,<br class="wide-break" /> business strategy,<br class="wide-break" /> and <em>building companies.</em></h1>
+      </div>
+      <div class="hero-aside">
+        <p>I work with business leaders on putting AI into practice. Here, I write about what it takes to create value, how technology changes competition, and the decisions that follow.</p>
+        <a class="text-link" href="/about/">About me <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    {featured && (
+      <section class="homepage-section" aria-labelledby="featured">
+        <div class="section-heading">
+          <h2 id="featured" class="label">Featured reflection</h2>
+          <a class="text-link" href="/reflections/">All reflections <span aria-hidden="true">↗</span></a>
+        </div>
+        <ReflectionCard entry={featured} />
+      </section>
+    )}
+    {recent.length > 0 && (
+      <section class="homepage-section" aria-labelledby="recent">
+        <div class="section-heading"><h2 id="recent" class="label">Recent reflections</h2></div>
+        {recent.slice(0, 3).map((entry) => <ReflectionCard entry={entry} />)}
+      </section>
+    )}
+  </div>
 </BaseLayout>

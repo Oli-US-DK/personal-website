@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ReflectionCard from "../../components/ReflectionCard.astro";
+import { getReflections } from "../../reflections";
+
+const entries = await getReflections();
+---
+<BaseLayout title="Reflections">
+  <div class="shell inner-page">
+    <header class="page-heading">
+      <h1>Reflections</h1>
+      <p class="dek">Long-form essays on how AI changes the work of running a business and where value goes when it does.</p>
+    </header>
+    <div class="archive">
+      {entries.length ? entries.map((entry) => <ReflectionCard entry={entry} />) : <p>New reflections will appear here as they’re published.</p>}
+    </div>
+  </div>
+</BaseLayout>

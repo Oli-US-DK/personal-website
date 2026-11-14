@@ -1,0 +1,44 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { LINKEDIN_URL, SITE_TITLE } from "../../consts";
+import { getReflections, reflectionMeta } from "../../reflections";
+
+export async function getStaticPaths() {
+  const entries = await getReflections();
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry, related: entries.filter((other) => other.id !== entry.id).slice(0, 2) },
+  }));
+}
+
+const { entry, related } = Astro.props;
+const { Content } = await render(entry);
+const { title, description, image, linkedInUrl } = entry.data;
+---
+<BaseLayout {title} {description} {image} article>
+  <article class="shell inner-page essay">
+    <header class="essay-heading reading-width">
+      <a class="text-link back-link" href="/reflections/"><span aria-hidden="true">←</span> All reflections</a>
+      <p class="label">{reflectionMeta(entry)}</p>
+      <h1>{title}</h1>
+      <p class="dek">{description}</p>
+      <a class="byline" href="/about/">{SITE_TITLE}</a>
+    </header>
+    {image && <img class="essay-image" src={image} alt="" width="1200" height="800" />}
+    <div class="reading-width prose"><Content /></div>
+    <aside class="reading-width essay-end" aria-label="About the author">
+      <h2><a href="/about/">{SITE_TITLE}</a></h2>
+      <p>Oliver is VP of Enterprise at Invisible Technologies and previously served as an Associate Partner at McKinsey.</p>
+      <a class="text-link" href={linkedInUrl ?? LINKEDIN_URL}>
+        {linkedInUrl ? "Discuss on LinkedIn" : "Connect on LinkedIn"} <span aria-hidden="true">↗</span>
+      </a>
+      {related.length > 0 && (
+        <div class="related">
+          <h3>Related reflections</h3>
+          <ul>{related.map((item) => <li><a href={`/reflections/${item.id}/`}>{item.data.title}</a></li>)}</ul>
+        </div>
+      )}
+    </aside>
+  </article>
+</BaseLayout>
