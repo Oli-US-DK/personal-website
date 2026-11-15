@@ -4,6 +4,7 @@ description: AI can change the volume and complexity of what buyers ask for. Wha
 topic: AI & competition
 pubDate: 2026-11-14
 draft: false
+featured: true
 image: /images/customer-response-speed.webp
 ---
 

@@ -9,6 +9,7 @@ const reflections = defineCollection({
     topic: z.string(),
     pubDate: z.coerce.date().optional(),
     draft: z.boolean().default(true),
+    featured: z.boolean().default(false),
     image: z.string().optional(),
     linkedInUrl: z.string().url().optional(),
   }),

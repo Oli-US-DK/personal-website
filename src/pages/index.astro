@@ -3,7 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ReflectionCard from "../components/ReflectionCard.astro";
 import { getReflections } from "../reflections";
 
-const [featured, ...recent] = await getReflections();
+const entries = await getReflections();
+const featured = entries.find(({ data }) => data.featured) ?? entries[0];
+const recent = entries.filter((entry) => entry !== featured);
 ---
 <BaseLayout>
   <div class="shell">
