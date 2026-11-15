@@ -4,6 +4,7 @@ description: "Why domain expertise matters alongside engineering and orchestrati
 topic: "Enterprise AI"
 pubDate: "2026-11-15"
 draft: false
+linkedinArchiveOrder: 6
 ---
 
 The most important question in enterprise AI right now isn't which model is best. It's who can actually deploy AI into real businesses.

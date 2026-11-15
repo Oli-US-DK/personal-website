@@ -4,6 +4,7 @@ description: "Why I joined Invisible Technologies to help companies put AI into 
 topic: "Career"
 pubDate: "2026-11-15"
 draft: false
+linkedinArchiveOrder: 8
 ---
 
 Starting today as VP of Enterprise at Invisible Technologies.
@@ -17,5 +18,3 @@ What drew me in: a team that understands both the strategic ambition and the ope
 If you're thinking about how to accelerate your business with AI, I'd love to connect.
 
 To my clients and colleagues at McKinsey -- thank you for an extraordinary chapter. You made the work meaningful and I look forward to staying close.
-
-Alexius Wronka, Aaron Bawcom, Guillaume Esnou, Adam Parrish, Monika Mazur, César Yazbeck, MD, Emily O'Connor, Katie Franzen, Rayna Chandaria, Carl Sandberg, Sorcha Reilly, Adam Kuznia

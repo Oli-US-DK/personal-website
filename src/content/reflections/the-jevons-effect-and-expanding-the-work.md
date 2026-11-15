@@ -4,6 +4,7 @@ description: "What happens when cheaper thinking work lets teams take on more am
 topic: "AI & competition"
 pubDate: "2026-11-15"
 draft: false
+linkedinArchiveOrder: 7
 ---
 
 Most boardrooms are still asking "how many seats can AI take out?"

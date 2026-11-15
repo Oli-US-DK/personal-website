@@ -4,6 +4,7 @@ description: "A reflection from Alignment 2026 on adoption and the long-term cos
 topic: "Enterprise AI"
 pubDate: "2026-11-15"
 draft: false
+linkedinArchiveOrder: 3
 ---
 
 Thank you to Valley101 and Yiwen Lu for having me at Alignment 2026, and to Shawn Li (OpenAI) and Duo Ding (Cresta) for a great conversation on what it really takes to make AI work in the enterprise.

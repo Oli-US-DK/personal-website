@@ -8,6 +8,7 @@ const reflections = defineCollection({
     description: z.string(),
     topic: z.string(),
     pubDate: z.coerce.date().optional(),
+    linkedinArchiveOrder: z.number().int().positive().optional(),
     draft: z.boolean().default(true),
     featured: z.boolean().default(false),
     image: z.string().optional(),

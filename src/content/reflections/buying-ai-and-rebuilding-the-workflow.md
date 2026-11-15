@@ -4,6 +4,7 @@ description: "How redesigning workflows changes the economics of enterprise AI."
 topic: "Enterprise AI"
 pubDate: "2026-11-15"
 draft: false
+linkedinArchiveOrder: 5
 ---
 
 Bain just published a finding I haven't been able to stop thinking about: 40% of companies that measured AI cost savings landed below 10% — despite targeting 11–20%. The tech worked. The value didn't.

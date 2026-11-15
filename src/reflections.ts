@@ -2,7 +2,11 @@ import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getReflections() {
   const entries = await getCollection("reflections", ({ data }) => import.meta.env.DEV || !data.draft);
-  return entries.sort((a, b) => (b.data.pubDate?.getTime() ?? 0) - (a.data.pubDate?.getTime() ?? 0));
+  return entries.sort((a, b) => {
+    // The imported LinkedIn posts have a known sequence but only relative dates.
+    const archiveOrder = (a.data.linkedinArchiveOrder ?? 0) - (b.data.linkedinArchiveOrder ?? 0);
+    return archiveOrder || (b.data.pubDate?.getTime() ?? 0) - (a.data.pubDate?.getTime() ?? 0);
+  });
 }
 
 export function reflectionMeta({ body, data }: CollectionEntry<"reflections">) {
